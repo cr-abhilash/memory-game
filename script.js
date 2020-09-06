@@ -1,4 +1,4 @@
-const gameContainer = document.getElementsById("game");
+const gameContainer = document.getElementById("game");
 
 const COLORS = [
   "red",
@@ -78,7 +78,20 @@ sessionStorage.setItem("matched",0);
 // TODO: Implement this function!
 function handleCardClick(event) {
   // you can use event.target to see which element was clicked
-  console.log("you clicked",event.target);
+  let prevEvent=Event.getPrevEvent;
+  let clicks=parseInt(sessionStorage.getItem("clicks"));
+  let matchedBox=parseInt(sessionStorage.getItem("matched"));
+  console.log("you clicked", event.target);
+  if(clicks==0 && event.target.className!="matched"){
+    event.target.innerText="";
+    event.target.style.backgroundColor=event.target.className;
+    console.log("i am first clicked")
+    event.target.style.backgroundColor=event.target.className;
+    Event.setPrevEvent=event;
+    console.log( Event.getPrevEvent)
+    console.log(event)
+    sessionStorage.setItem("clicks",1);
+  }
 }
 
 // when the DOM loads
