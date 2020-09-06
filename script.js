@@ -1,4 +1,4 @@
-const gameContainer = document.getElementsById("game");
+const gameContainer = document.getElementById("game");
 
 const COLORS = [
   "red",
@@ -45,7 +45,7 @@ function createDivsForColors(colorArray) {
   for (let color of colorArray) {
     // create a new div
     const newDiv = document.createElement("div");
-
+    newDiv.innerHTML="Click Me?"
     // give it a class attribute for the value we are looping over
     newDiv.classList.add(color);
 
@@ -57,11 +57,17 @@ function createDivsForColors(colorArray) {
   }
 }
 
+
+
 // TODO: Implement this function!
 function handleCardClick(event) {
   // you can use event.target to see which element was clicked
-  console.log("you clicked",event.target);
+  console.log("you clicked", event.target);
+  
+ 
 }
 
 // when the DOM loads
-createDivsForColors(shuffledColors);
+document.addEventListener('DOMContentLoaded',
+  createDivsForColors(shuffledColors)
+);
