@@ -45,7 +45,7 @@ function createDivsForColors(colorArray) {
   for (let color of colorArray) {
     // create a new div
     const newDiv = document.createElement("div");
-
+    newDiv.innerHTML='click me?';
     // give it a class attribute for the value we are looping over
     newDiv.classList.add(color);
 
@@ -58,6 +58,34 @@ function createDivsForColors(colorArray) {
 }
 
 
+
+
+//function for checking matching div boxes
+function matching(prevEvent,event){
+  let matchedBox=parseInt(sessionStorage.getItem("matched"));
+  if(window.getComputedStyle(event.target).backgroundColor===window.getComputedStyle(prevEvent.target).backgroundColor) {
+    event.target.innerText=`matched `;
+    prevEvent.target.innerText=`matched`;
+    event.target.className="matched"
+    prevEvent.target.className="matched"
+    sessionStorage.setItem("matched",matchedBox+2);
+    if(sessionStorage.getItem("matched")==10){
+      setTimeout(()=>{
+        alert("game over")
+      },500);
+    }
+    sessionStorage.setItem("clicks",0);
+  }
+  else{
+    setTimeout(()=>{
+    event.target.innerText="click me?";
+    prevEvent.target.innerText="click me?";
+    prevEvent.target.style.backgroundColor="black";
+    event.target.style.backgroundColor="black";
+    sessionStorage.setItem("clicks",0);
+    },1000);
+  }
+}
 // function to get privous event
 let Event=(function lastEvent(){
   let prevEvent;
@@ -80,7 +108,7 @@ function handleCardClick(event) {
   // you can use event.target to see which element was clicked
   let prevEvent=Event.getPrevEvent;
   let clicks=parseInt(sessionStorage.getItem("clicks"));
-  let matchedBox=parseInt(sessionStorage.getItem("matched"));
+  
   console.log("you clicked", event.target);
   if(clicks==0 && event.target.className!="matched"){
     event.target.innerText="";
@@ -97,7 +125,7 @@ function handleCardClick(event) {
     sessionStorage.setItem("clicks",2);
     event.target.innerText="";
     event.target.style.backgroundColor=event.target.className;
-    
+    matching(prevEvent,event)
    
 }
 }
