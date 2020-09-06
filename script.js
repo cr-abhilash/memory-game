@@ -110,6 +110,8 @@ function handleCardClick(event) {
   let clicks=parseInt(sessionStorage.getItem("clicks"));
   
   console.log("you clicked", event.target);
+
+  //condition to handle first click
   if(clicks==0 && event.target.className!="matched"){
     event.target.innerText="";
     event.target.style.backgroundColor=event.target.className;
@@ -120,7 +122,7 @@ function handleCardClick(event) {
     console.log(event)
     sessionStorage.setItem("clicks",1);
   }
-
+// condition to handle second click
   else if(clicks==1 && event.target!==prevEvent.target){
     sessionStorage.setItem("clicks",2);
     event.target.innerText="";
