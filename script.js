@@ -92,6 +92,14 @@ function handleCardClick(event) {
     console.log(event)
     sessionStorage.setItem("clicks",1);
   }
+
+  else if(clicks==1 && event.target!==prevEvent.target){
+    sessionStorage.setItem("clicks",2);
+    event.target.innerText="";
+    event.target.style.backgroundColor=event.target.className;
+    
+   
+}
 }
 
 // when the DOM loads
