@@ -57,6 +57,24 @@ function createDivsForColors(colorArray) {
   }
 }
 
+
+// function to get privous event
+let Event=(function lastEvent(){
+  let prevEvent;
+  return {
+    get getPrevEvent(){
+      return prevEvent;
+    },
+    set setPrevEvent(event){
+      prevEvent=event;
+    }
+  }
+  
+})();
+
+// using session storage to store some data
+sessionStorage.setItem("clicks",0);
+sessionStorage.setItem("matched",0);
 // TODO: Implement this function!
 function handleCardClick(event) {
   // you can use event.target to see which element was clicked
