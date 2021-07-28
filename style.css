@@ -2,19 +2,32 @@
    background-color: cadetblue;
    box-sizing: border-box;
  }
+ .headerWrapper{
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   position: relative;
+ }
+ .scoreWrapper{
+   position: absolute;
+   right: 10%;
+   display: flex;
+   font-size: 25px;
+   font-weight: bold;
+   color:rgb(19, 19, 75);
+ }
  
  #game{
    width: 100%;
-   height:80vh;
+   height:calc(100vh - 100px);
    display: flex;
    flex-wrap: wrap;
    justify-content: center;
-   
-
+   align-content: center;
  }
  #game div {
   border: 1px solid black;
-  width: 25%;
+  width: 20%;
   height: 25%;
   margin: 10px;
   background-color: black;
@@ -23,9 +36,24 @@
   justify-content: center;
   align-items: center;
   font-size:80%;
- 
 } 
 h1{
   text-align:center;
   color:rgb(19, 19, 75);
+}
+
+
+@media only screen and (max-width: 400px) {
+  #game div {
+    border: 1px solid black;
+    width: 27%;
+    height: 20%;
+    margin: 10px;
+    background-color: black;
+    color:wheat;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size:25px;
+  }
 }

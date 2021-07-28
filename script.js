@@ -1,5 +1,6 @@
 const gameContainer = document.getElementById("game");
-
+let score=0,nclicks=0;
+let scoreTarget=document.getElementsByClassName('scoreValue')[0];
 const COLORS = [
   "red",
   "blue",
@@ -66,23 +67,27 @@ function matching(prevEvent,event){
   if(window.getComputedStyle(event.target).backgroundColor===window.getComputedStyle(prevEvent.target).backgroundColor) {
     event.target.innerText=`matched `;
     prevEvent.target.innerText=`matched`;
-    event.target.className="matched"
-    prevEvent.target.className="matched"
+    event.target.className="matched";
+    prevEvent.target.className="matched";
     sessionStorage.setItem("matched",matchedBox+2);
+    score=score+5;
+    scoreTarget.innerText=score;
     if(sessionStorage.getItem("matched")==10){
       setTimeout(()=>{
-        alert("game over")
+        alert(`Game over!, Your score is ${score}`);
       },500);
     }
     sessionStorage.setItem("clicks",0);
   }
   else{
     setTimeout(()=>{
-    event.target.innerText="click me?";
-    prevEvent.target.innerText="click me?";
-    prevEvent.target.style.backgroundColor="black";
-    event.target.style.backgroundColor="black";
-    sessionStorage.setItem("clicks",0);
+      nclicks>3?score=score-1:0;
+      scoreTarget.innerText=score;
+      event.target.innerText="click me?";
+      prevEvent.target.innerText="click me?";
+      prevEvent.target.style.backgroundColor="black";
+      event.target.style.backgroundColor="black";
+      sessionStorage.setItem("clicks",0);
     },1000);
   }
 }
@@ -108,7 +113,7 @@ function handleCardClick(event) {
   // you can use event.target to see which element was clicked
   let prevEvent=Event.getPrevEvent;
   let clicks=parseInt(sessionStorage.getItem("clicks"));
-  
+  nclicks+=1;
   console.log("you clicked", event.target);
 
   //condition to handle first click
@@ -128,7 +133,6 @@ function handleCardClick(event) {
     event.target.innerText="";
     event.target.style.backgroundColor=event.target.className;
     matching(prevEvent,event)
-   
 }
 }
 
